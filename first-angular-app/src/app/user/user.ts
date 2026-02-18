@@ -1,7 +1,17 @@
 import { Component, computed, Input, input, Output, output, EventEmitter } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+// type UserType = {
+//   id: string;
+//   name: string;
+//   avatar: string;
+// }
+
+interface T_User {
+  id: string;
+  name: string;
+  avatar: string;
+}
 
 @Component({
   selector: 'app-user',
@@ -10,11 +20,7 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.css',
 })
 export class User {
-  @Input({ required: true }) user!: {
-    id: string;
-    name: string;
-    avatar: string;
-  };
+  @Input({ required: true }) user!: T_User;
 
   @Output() select = new EventEmitter<string>();
 
