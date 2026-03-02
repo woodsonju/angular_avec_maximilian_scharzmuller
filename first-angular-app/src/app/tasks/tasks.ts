@@ -19,7 +19,7 @@ export class Tasks {
     {
       id: 't1',
       userId: 'u1',
-      name: 'Master Angular',
+      title: 'Master Angular',
       summary: 'Learn all the basic and advanced features of Angular & how to apply them',
       dueDate: '2025-12-31',
     },
