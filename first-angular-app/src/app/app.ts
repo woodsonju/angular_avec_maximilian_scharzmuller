@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from './header/header';
-import { User } from './user/user';
+import { HeaderComponent } from './header/header.component';
+import { UserCompenent } from './user/user.component';
 import { DUMMY_USERS } from './dummy-users';
-import { Tasks } from './tasks/tasks';
+import { TasksComponent } from './tasks/tasks.component';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, User, Tasks],
+  imports: [HeaderComponent, UserCompenent, TasksComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
