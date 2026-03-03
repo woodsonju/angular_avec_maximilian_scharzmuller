@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { required } from '@angular/forms/signals';
-import { Task } from './task/task.model';
+import { NewTaskData, Task } from './task/task.model';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 
@@ -56,6 +56,18 @@ export class TasksComponent {
   }
 
   onCancelAddTask() {
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewTaskData) {
+    const newTask: Task = {
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.dueDate,
+    };
+    this.tasks.unshift(newTask);
     this.isAddingTask = false;
   }
 }
