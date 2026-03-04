@@ -3,6 +3,7 @@ import { required } from '@angular/forms/signals';
 import { NewTaskData, Task } from './task/task.model';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { TasksServices } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -19,13 +20,15 @@ export class TasksComponent {
 
   isAddingTask = false; //Par défaut, on le l'affiche pas
 
+  constructor(private tasksService: TasksServices) {}
+
   get selectedUserTasks() {
-    return;
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   //Remove the task with the given id from the list of tasks
   onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.tasksService.removeTask(id);
   }
 
   onStartAddTask() {
@@ -37,6 +40,7 @@ export class TasksComponent {
   }
 
   onAddTask(taskData: NewTaskData) {
+    this.tasksService.addTask(taskData, this.userId);
     this.isAddingTask = false;
   }
 }
