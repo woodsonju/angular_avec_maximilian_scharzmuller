@@ -26,11 +26,6 @@ export class TasksComponent {
     return this.tasksService.getUserTasks(this.userId);
   }
 
-  //Remove the task with the given id from the list of tasks
-  onCompleteTask(id: string) {
-    this.tasksService.removeTask(id);
-  }
-
   onStartAddTask() {
     this.isAddingTask = true;
   }
