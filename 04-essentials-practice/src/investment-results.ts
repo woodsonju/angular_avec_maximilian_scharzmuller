@@ -2,8 +2,14 @@
 // e.g., integrate it into a service or component
 // You may need to tweak it, depending on where and how you use it
 
-function calculateInvestmentResults() {
+import { InvestmentInput } from './app/investment-input.model';
+
+function calculateInvestmentResults(data: InvestmentInput) {
   const annualData = [];
+
+  const { initialInvestment, duration, expectedReturn, annualInvestment } =
+    data;
+
   let investmentValue = initialInvestment;
 
   for (let i = 0; i < duration; i++) {
