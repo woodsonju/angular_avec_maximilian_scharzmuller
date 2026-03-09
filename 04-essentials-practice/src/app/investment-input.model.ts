@@ -5,7 +5,7 @@ export interface InvestmentInput {
   annualInvestment: number;
 }
 
-// type InvestmentInput = {
+// export type InvestmentInput = {
 //   initialInvestment: number;
 //   duration: number;
 //   expectedReturn: number;
