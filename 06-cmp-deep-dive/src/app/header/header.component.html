@@ -14,7 +14,12 @@
       <li>
         <button appButton>
           Logout
-          <span class="icon"> → </span>
+          <!--  
+              On projet cet element via ngProjectAs dans le composant button 
+              Ensuite dans le template du composant button, on utilise un ng-content select pour 
+               cibler cet element et lui appliquer une classe d'icon
+           -->
+          <span ngProjectAs="icon"> → </span>
         </button>
       </li>
     </ul>

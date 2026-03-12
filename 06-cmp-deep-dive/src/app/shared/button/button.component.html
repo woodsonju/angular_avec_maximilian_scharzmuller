@@ -1,0 +1,12 @@
+<span> <ng-content /></span>
+<span class="icon">
+  <!--  
+        On projet cet element via ngProjectAs dans le composant button 
+        Ensuite dans le template du composant button, on utilise un ng-content select pour 
+        cibler cet element et lui appliquer une classe d'icon. 
+        L'interet de cette approche est que le composant button n'a pas besoin de connaitre 
+        à l'avance les éléments qui seront projetés et qui doivent être stylisés 
+        comme des icones.
+     -->
+  <ng-content select="icon" />
+</span>
