@@ -13,10 +13,10 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'app-lifecycle',
-    imports: [],
-    templateUrl: './lifecycle.component.html',
-    styleUrl: './lifecycle.component.css'
+  selector: 'app-lifecycle',
+  imports: [],
+  templateUrl: './lifecycle.component.html',
+  styleUrl: './lifecycle.component.css',
 })
 export class LifecycleComponent
   implements
@@ -37,6 +37,7 @@ export class LifecycleComponent
 
   ngOnInit() {
     console.log('ngOnInit');
+    console.log(this.text);
   }
 
   ngOnChanges(changes: SimpleChanges) {
