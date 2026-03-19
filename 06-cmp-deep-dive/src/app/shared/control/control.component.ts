@@ -8,6 +8,7 @@ import {
   input,
   ViewEncapsulation,
   contentChild,
+  AfterContentInit,
 } from '@angular/core';
 
 @Component({
@@ -21,7 +22,7 @@ import {
     '(click)': 'onClick()',
   },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   // @HostBinding('class') className = 'control';
   // @HostListener('click') onClick() {
   //   console.log('Clicked!');
@@ -54,4 +55,6 @@ export class ControlComponent {
     console.log(this.el);
     console.log(this.control());
   }
+
+  ngAfterContentInit(): void {}
 }
