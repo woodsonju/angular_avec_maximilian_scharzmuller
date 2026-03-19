@@ -9,6 +9,8 @@ import {
   ViewEncapsulation,
   contentChild,
   AfterContentInit,
+  afterNextRender,
+  afterEveryRender,
 } from '@angular/core';
 
 @Component({
@@ -50,6 +52,16 @@ export class ControlComponent implements AfterContentInit {
     contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
       'input',
     );
+
+  constructor() {
+    afterEveryRender(() => {
+      console.log('afterEveryRender');
+    });
+    afterNextRender(() => {
+      console.log('afterNextRender');
+    });
+  }
+
   onClick() {
     console.log('Clicked!');
     console.log(this.el);
