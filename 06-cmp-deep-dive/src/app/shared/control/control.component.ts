@@ -30,6 +30,7 @@ export class ControlComponent implements AfterContentInit {
   //   console.log('Clicked!');
   // }
   label = input.required<string>();
+
   private el = inject(ElementRef);
 
   //Pour acceder au contenu projeté
