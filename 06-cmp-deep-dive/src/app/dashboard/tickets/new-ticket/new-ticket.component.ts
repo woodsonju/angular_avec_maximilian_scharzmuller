@@ -5,10 +5,14 @@ import {
   OnInit,
   viewChild,
   ViewChild,
+  Output,
+  EventEmitter,
+  output,
 } from '@angular/core';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { ControlComponent } from '../../../shared/control/control.component';
 import { FormsModule } from '@angular/forms';
+import { Ticket } from '../ticket.model';
 
 @Component({
   selector: 'app-new-ticket',
@@ -22,10 +26,13 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   //Avec la fonction viewChild (signal)
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
-  onSubmit(titleElement: string, textInput: string) {
-    console.log('Form submitted!');
-    console.log(titleElement);
-    console.log(textInput);
+  //@Output() add: EventEmitter<{ title: string; text: string }> = new EventEmitter();
+  //Avec signal, output function
+  add = output<{ title: string; text: string }>();
+
+  onSubmit(title: string, ticketText: string) {
+    this.add.emit({ title: title, text: ticketText });
+
     this.form().nativeElement.reset();
   }
 
