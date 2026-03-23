@@ -26,14 +26,18 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   //Avec la fonction viewChild (signal)
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
+  enteredTitle = '';
+  enteredText = '';
+
   //@Output() add: EventEmitter<{ title: string; text: string }> = new EventEmitter();
   //Avec signal, output function
   add = output<{ title: string; text: string }>();
 
-  onSubmit(title: string, ticketText: string) {
-    this.add.emit({ title: title, text: ticketText });
-
-    this.form().nativeElement.reset();
+  onSubmit() {
+    this.add.emit({ title: this.enteredTitle, text: this.enteredText });
+    //this.form().nativeElement.reset();
+    this.enteredText = '';
+    this.enteredTitle = '';
   }
 
   ngOnInit(): void {
