@@ -2,6 +2,7 @@ import { DatePipe, DecimalPipe, registerLocaleData } from '@angular/common';
 import { Component } from '@angular/core';
 import localFr from '@angular/common/locales/fr';
 import { TemperaturePipe } from './temperature.pipe';
+import { SortPipe } from './sort.pipe';
 
 registerLocaleData(localFr);
 
@@ -9,7 +10,7 @@ registerLocaleData(localFr);
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [DatePipe, DecimalPipe, TemperaturePipe],
+  imports: [DatePipe, DecimalPipe, TemperaturePipe, SortPipe],
 })
 export class AppComponent {
   currentDate = new Date();
