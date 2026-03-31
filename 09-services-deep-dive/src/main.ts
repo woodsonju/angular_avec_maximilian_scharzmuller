@@ -1,13 +1,24 @@
-import { provideZoneChangeDetection } from '@angular/core';
+import {
+  Inject,
+  InjectionToken,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 
 import { AppComponent } from './app/app.component';
-// import { TasksService } from './app/tasks/tasks.service';
+import { TasksService } from './app/tasks/tasks.service';
 
-// bootstrapApplication(AppComponent, {
-//   providers: [provideZoneChangeDetection(), TasksService],
-// }).catch((err) => console.error(err));
+export const TasksServiceToken = new InjectionToken<TasksService>(
+  'tasks-service-token',
+);
 
 bootstrapApplication(AppComponent, {
-  providers: [provideZoneChangeDetection()],
+  providers: [
+    provideZoneChangeDetection(),
+    { provide: TasksServiceToken, useClass: TasksService },
+  ],
 }).catch((err) => console.error(err));
+
+// bootstrapApplication(AppComponent, {
+//   providers: [provideZoneChangeDetection()],
+// }).catch((err) => console.error(err));
