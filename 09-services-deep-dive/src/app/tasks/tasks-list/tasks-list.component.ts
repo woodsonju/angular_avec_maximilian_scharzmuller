@@ -3,17 +3,28 @@ import { Component, signal, inject, computed } from '@angular/core';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TasksService } from '../tasks.service';
 import { TasksServiceToken } from '../../../main';
+import {
+  TASK_STATUS_OPTIONS,
+  TaskStatusOptions,
+  taskStatusOptionsProvider,
+} from '../task.model';
 
 @Component({
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.css',
   imports: [TaskItemComponent],
+  providers: [taskStatusOptionsProvider], // Fournit les options de statut des tâches à ce composant et à ses enfants via le token d'injection TASK_STATUS_OPTIONS
 })
 export class TasksListComponent {
   private tasksService = inject(TasksServiceToken);
 
   private selectedFilter = signal<string>('all');
+
+  //Angular cherche TASK_STATUS_OPTIONS
+  // trouve dans l'Element Injector
+  // retourne le tableau TaskStatusOptions
+  taskStatusOptions = inject(TASK_STATUS_OPTIONS); // Récupère les options de statut des tâches fournies par le provider taskStatusOptionsProvider via le token d'injection TASK_STATUS_OPTIONS
 
   //computed() recalcule automatiquement quand selectedFilter change (mise à jour du signal selectedFilter
   //via onChangeTasksFilter qui est appelé par le template lorsque l'utilisateur clique sur un bouton
