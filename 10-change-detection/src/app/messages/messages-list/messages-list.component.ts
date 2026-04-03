@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DestroyRef,
   inject,
   input,
+  OnInit,
 } from '@angular/core';
 import { MessagesService } from '../messages.services';
 
@@ -13,11 +16,32 @@ import { MessagesService } from '../messages.services';
   styleUrl: './messages-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessagesListComponent {
+export class MessagesListComponent implements OnInit {
   private messsagesService = inject(MessagesService);
+  //ChangeDetectorRef est utilisé pour déclencher manuellement la détection de changement
+  private cdRef = inject(ChangeDetectorRef);
 
-  get messages() {
-    return this.messsagesService.getAllMessages();
+  //DestroyRef est utilisé pour gérer la durée de vie des abonnements
+  //et éviter les fuites de mémoire
+  private destroyRef = inject(DestroyRef);
+
+  messages: string[] = [];
+
+  ngOnInit(): void {
+    const subscription = this.messsagesService.message$.subscribe(
+      (messages) => {
+        this.messages = messages;
+        //markForCheck dit à OnPush de re-rendre le composant
+        //Permet déclencher manuellement la détection des changements dans un composant
+        this.cdRef.markForCheck();
+      },
+    );
+
+    //S'assure que la subscription est nettoyée lorsque le composant est supprimé,
+    //évitant ainsi les fuites de mémoire.
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
   }
 
   get debugOutput() {
