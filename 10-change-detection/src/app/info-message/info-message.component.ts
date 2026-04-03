@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class InfoMessageComponent {
   get debugOutput() {
     console.log('[InfoMessages] "debugOutput" binding re-evaluated.');
-    return Math.random();
+    return 'InfoMessage Component Debug Output';
   }
 
   onLog() {
