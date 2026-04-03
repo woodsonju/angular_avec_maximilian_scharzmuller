@@ -17,8 +17,4 @@ export class MessagesComponent {
     console.log('[Messages] "debugOutput" binding re-evaluated.');
     return 'Messages Component Debug Output';
   }
-
-  onAddMessage(message: string) {
-    this.messages.update((oldMessages) => [...oldMessages, message]);
-  }
 }
