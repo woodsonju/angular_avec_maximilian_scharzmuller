@@ -15,9 +15,11 @@ export class TaskItemComponent {
   private tasksService = inject(TasksServiceToken);
 
   //Angular cherche TASK_STATUS_OPTIONS
-  // trouve dans l'Element Injector
-  // retourne le tableau TaskStatusOptions
-  //Récupère les options de statut des tâches fournies par le provider taskStatusOptionsProvider via le token d'injection TASK_STATUS_OPTIONS
+  //trouve dans l'Element Injector
+  //retourne le tableau TaskStatusOptions
+  //Récupère les options de statut des tâches fournies 
+  //par le provider taskStatusOptionsProvider 
+  //via le token d'injection TASK_STATUS_OPTIONS
   taskStatusOptions = inject(TASK_STATUS_OPTIONS);
 
   task = input.required<Task>();

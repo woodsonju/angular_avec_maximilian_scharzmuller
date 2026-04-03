@@ -50,7 +50,7 @@ export class TasksListComponent {
 
   //Met à jour le Signal selectedFilter avec la nouvelle valeur du filtre sélectionné par l'utilisateur
   //l'appel de set() sur le Signal selectedFilter déclenche automatiquement le recalcul de la
-  //méthodecomputed tasks, ce qui met à jour la liste des tâches affichées dans le template
+  //méthode computed tasks, ce qui met à jour la liste des tâches affichées dans le template
   //en fonction du nouveau filtre sélectionné
   onChangeTasksFilter(filter: string) {
     this.selectedFilter.set(filter); // met à jour le Signal
