@@ -3,11 +3,10 @@ import { Component, signal } from '@angular/core';
 import { InfoMessageComponent } from '../info-message/info-message.component';
 
 @Component({
-  selector: 'app-counter',
-  standalone: true,
-  templateUrl: './counter.component.html',
-  styleUrl: './counter.component.css',
-  imports: [InfoMessageComponent],
+    selector: 'app-counter',
+    templateUrl: './counter.component.html',
+    styleUrl: './counter.component.css',
+    imports: [InfoMessageComponent]
 })
 export class CounterComponent {
   count = signal(0);

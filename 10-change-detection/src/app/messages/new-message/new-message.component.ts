@@ -2,11 +2,10 @@ import { Component, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-new-message',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './new-message.component.html',
-  styleUrl: './new-message.component.css',
+    selector: 'app-new-message',
+    imports: [FormsModule],
+    templateUrl: './new-message.component.html',
+    styleUrl: './new-message.component.css'
 })
 export class NewMessageComponent {
   add = output<string>();
