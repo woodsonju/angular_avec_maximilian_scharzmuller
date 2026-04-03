@@ -1,5 +1,6 @@
 <ul>
-  @for (message of messages; track message) {
+  <!-- Utilisation de l'opérateur async pour s'abonner automatiquement au flux de messages -->
+  @for (message of messages$ | async; track message) {
     <li>{{ message }}</li>
   }
 </ul>
