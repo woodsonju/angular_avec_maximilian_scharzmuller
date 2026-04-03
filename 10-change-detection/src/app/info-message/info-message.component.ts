@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-info-message',
-    imports: [],
-    templateUrl: './info-message.component.html',
-    styleUrl: './info-message.component.css'
+  selector: 'app-info-message',
+  imports: [],
+  templateUrl: './info-message.component.html',
+  styleUrl: './info-message.component.css',
 })
 export class InfoMessageComponent {
   get debugOutput() {
     console.log('[InfoMessages] "debugOutput" binding re-evaluated.');
-    return 'InfoMessage Component Debug Output';
+    return Math.random();
   }
 
   onLog() {
