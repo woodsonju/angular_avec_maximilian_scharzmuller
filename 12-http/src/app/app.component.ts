@@ -4,10 +4,9 @@ import { AvailablePlacesComponent } from './places/available-places/available-pl
 import { UserPlacesComponent } from './places/user-places/user-places.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [AvailablePlacesComponent, UserPlacesComponent],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [AvailablePlacesComponent, UserPlacesComponent]
 })
 export class AppComponent {}

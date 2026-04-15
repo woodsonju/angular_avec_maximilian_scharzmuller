@@ -3,11 +3,10 @@ import { Component, input, output } from '@angular/core';
 import { Place } from './place.model';
 
 @Component({
-  selector: 'app-places',
-  standalone: true,
-  imports: [],
-  templateUrl: './places.component.html',
-  styleUrl: './places.component.css',
+    selector: 'app-places',
+    imports: [],
+    templateUrl: './places.component.html',
+    styleUrl: './places.component.css'
 })
 export class PlacesComponent {
   places = input.required<Place[]>();

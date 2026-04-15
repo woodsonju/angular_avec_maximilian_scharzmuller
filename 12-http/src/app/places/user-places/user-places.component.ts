@@ -4,11 +4,10 @@ import { PlacesContainerComponent } from '../places-container/places-container.c
 import { PlacesComponent } from '../places.component';
 
 @Component({
-  selector: 'app-user-places',
-  standalone: true,
-  templateUrl: './user-places.component.html',
-  styleUrl: './user-places.component.css',
-  imports: [PlacesContainerComponent, PlacesComponent],
+    selector: 'app-user-places',
+    templateUrl: './user-places.component.html',
+    styleUrl: './user-places.component.css',
+    imports: [PlacesContainerComponent, PlacesComponent]
 })
 export class UserPlacesComponent {
 }
