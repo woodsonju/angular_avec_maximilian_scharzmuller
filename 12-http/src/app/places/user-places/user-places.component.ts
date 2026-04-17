@@ -3,10 +3,7 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { PlacesComponent } from '../places.component';
 import { Place } from '../place.model';
-import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { map } from 'rxjs/internal/operators/map';
-import { catchError } from 'rxjs/internal/operators/catchError';
+import { PlacesService } from '../places.service';
 
 @Component({
   selector: 'app-user-places',
@@ -19,37 +16,23 @@ export class UserPlacesComponent implements OnInit {
   isFetching = signal(false);
   error = signal('');
 
-  private httpClient = inject(HttpClient);
+  private placesService = inject(PlacesService);
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.isFetching.set(true);
-    const subscription = this.httpClient
-      .get<{ places: Place[] }>('http://localhost:3000/user-places')
-      .pipe(
-        map((resData) => resData.places),
-        catchError((err) => {
-          console.log(err);
-          return throwError(
-            () =>
-              new Error(
-                'Something went wrong fetching the available places. Please try again later.',
-              ),
-          );
-        }),
-      )
-      .subscribe({
-        next: (places) => {
-          this.places.set(places);
-        },
+    const subscription = this.placesService.loadUserPlaces().subscribe({
+      next: (places) => {
+        this.places.set(places);
+      },
 
-        error: (err: Error) => {
-          this.error.set(err.message);
-        },
-        complete: () => {
-          this.isFetching.set(false);
-        },
-      });
+      error: (err: Error) => {
+        this.error.set(err.message);
+      },
+      complete: () => {
+        this.isFetching.set(false);
+      },
+    });
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
