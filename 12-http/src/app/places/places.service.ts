@@ -36,10 +36,26 @@ export class PlacesService {
   }
 
   addPlaceToUserPlaces(place: Place) {
-    this.userPlaces.update((prevPlaces) => [...prevPlaces, place]);
-    return this.httpClient.put('http://localhost:3000/user-places', {
-      placeId: place.id,
-    });
+    //Sauvegarder l'état précedent
+    const prevPlaces = this.userPlaces();
+    //Mettre à jour l'état de manière optimiste
+    //On suppose que l'ajout de place réussira et on met à jour l'état
+    //de l'application en conséquence
+
+    if (!prevPlaces.some((p) => p.id === place.id)) {
+      this.userPlaces.set([...prevPlaces, place]);
+    }
+    return this.httpClient
+      .put('http://localhost:3000/user-places', {
+        placeId: place.id,
+      })
+      .pipe(
+        catchError((err) => {
+          //Restaurer l'état précedent en cas d'erreur
+          this.userPlaces.set(prevPlaces);
+          return throwError(() => new Error('Failed to store selected place.'));
+        }),
+      );
   }
 
   removeUserPlace(place: Place) {}
