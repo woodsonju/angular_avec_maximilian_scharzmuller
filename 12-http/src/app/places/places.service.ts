@@ -44,6 +44,8 @@ export class PlacesService {
     //On suppose que l'ajout de place réussira et on met à jour l'état
     //de l'application en conséquence
 
+    //Si la place n'est pas déjà dans les places de l'utilisateur,
+    //on l'ajoute
     if (!prevPlaces.some((p) => p.id === place.id)) {
       this.userPlaces.set([...prevPlaces, place]);
     }
@@ -61,7 +63,24 @@ export class PlacesService {
       );
   }
 
-  removeUserPlace(place: Place) {}
+  removeUserPlace(place: Place) {
+    const prevPlaces = this.userPlaces();
+    //Mettre à jour l'état de manière optimiste en supprimant la place de l'état
+    if (prevPlaces.some((p) => p.id === place.id)) {
+      this.userPlaces.set(prevPlaces.filter((p) => p.id !== place.id));
+    }
+    return this.httpClient
+      .delete(`http://localhost:3000/user-places/${place.id}`)
+      .pipe(
+        catchError((err) => {
+          this.userPlaces.set(prevPlaces);
+          this.errorService.showError('Failed to remove the selected place.');
+          return throwError(
+            () => new Error('Failed to remove the selected place.'),
+          );
+        }),
+      );
+  }
 
   private fetchPlaces(url: string, errorMessage: string) {
     return this.httpClient.get<{ places: Place[] }>(url).pipe(
