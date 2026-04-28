@@ -6,12 +6,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { of } from 'rxjs';
 
 function mustContainQuestionMark(control: AbstractControl) {
   if (control.value.includes('?')) {
     return null;
   }
   return { doesNotContainQuestionMark: true };
+}
+
+function emailIsUnique(control: AbstractControl) {
+  if (control.value !== 'test@mail.com') {
+    return of(null);
+  }
+  return of({ notUnique: true });
 }
 
 @Component({
@@ -25,6 +33,7 @@ export class LoginComponent {
   form = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.email, Validators.required],
+      asyncValidators: [emailIsUnique],
     }),
     password: new FormControl('', {
       validators: [
@@ -36,9 +45,9 @@ export class LoginComponent {
   });
 
   /*affiche seulement si :
-     1. l'utilisateur a quitté le champ ✅
-     2. l'utilisateur a tapé quelque chose ✅
-     3. la valeur est invalide ✅
+     1. l'utilisateur a quitté le champ 
+     2. l'utilisateur a tapé quelque chose 
+     3. la valeur est invalide 
   */
   get emailIsInvalid() {
     return (
