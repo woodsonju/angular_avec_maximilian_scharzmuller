@@ -63,23 +63,11 @@ export class SignupComponent {
     }),
   });
 
-  get emailIsInvalid() {
-    return (
-      this.form.controls.email.touched &&
-      this.form.controls.email.dirty &&
-      this.form.controls.email.invalid
-    );
-  }
-
-  get passwordIsInvalid() {
-    return (
-      this.form.controls.passwords.touched &&
-      this.form.controls.passwords.dirty &&
-      this.form.controls.passwords.invalid
-    );
-  }
-
   onSubmit() {
+    if (this.form.invalid) {
+      console.log('INVALID FORM');
+      return;
+    }
     console.log(this.form);
     console.log(this.form.value);
   }
