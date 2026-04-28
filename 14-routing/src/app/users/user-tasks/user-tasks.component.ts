@@ -1,5 +1,13 @@
-import { Component, computed, inject, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+} from '@angular/core';
 import { UsersService } from '../users.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -7,14 +15,37 @@ import { UsersService } from '../users.service';
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
 })
-export class UserTasksComponent {
-  //voir app.config.ts : withComponentInputBinding() permet de lier
-  //automatiquement les paramètres de l'URL (:userId). Plus besoin d'ActivatedRoute(ancienne méthode)
+export class UserTasksComponent implements OnInit {
+  //Façon moderne : avec withComponentInputBinding() voir app.config.ts
+  //withComponentInputBinding() permet de lier automatiquement les paramètres
+  //de l'URL (:userId). Plus besoin d'ActivatedRoute(ancienne méthode)
   userId = input.required<string>();
+
+  //Sans withComponentInputBinding — ancienne façon
+  //Avec ActivatedRoute
+  //On a besoin aussi d'implementer OnInit
+  private activatedRoute = inject(ActivatedRoute);
 
   private userService = inject(UsersService);
 
-  userName = computed(
-    () => this.userService.users.find((u) => u.id === this.userId())?.name,
-  );
+  private destroyRef = inject(DestroyRef);
+
+  userName = '';
+
+  ngOnInit(): void {
+    console.log(this.activatedRoute);
+    const subscription = this.activatedRoute.paramMap.subscribe({
+      next: (paramMap) => {
+        this.userName =
+          this.userService.users.find((u) => u.id === paramMap.get('userId'))
+            ?.name || '';
+      },
+    });
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
+  //Avec withComponentInputBinding
+  // userName = computed(
+  //   () => this.userService.users.find((u) => u.id === this.userId())?.name,
+  // );
 }
