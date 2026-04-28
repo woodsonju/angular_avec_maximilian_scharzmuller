@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 
 import { UserComponent } from './user/user.component';
 import { UsersService } from './users.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-users',
-    templateUrl: './users.component.html',
-    styleUrl: './users.component.css',
-    imports: [UserComponent]
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.css',
+  imports: [UserComponent],
 })
 export class UsersComponent {
   private usersService = inject(UsersService);
