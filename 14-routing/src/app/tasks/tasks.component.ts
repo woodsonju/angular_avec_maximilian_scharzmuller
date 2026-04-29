@@ -12,8 +12,9 @@ import { TasksService } from './tasks.service';
   imports: [TaskComponent],
 })
 export class TasksComponent {
-  //Avec l' tilisation de  withComponentInputBinding()
+  //Avec l' tilisation de  withComponentInputBinding() et withRouterConfig
   // =>  reçoit automatiquement :userId de la route PARENT
+  //
   userId = input.required<string>();
 
   private tasksService = inject(TasksService);
