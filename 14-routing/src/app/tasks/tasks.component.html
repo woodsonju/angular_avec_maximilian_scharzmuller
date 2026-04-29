@@ -8,8 +8,12 @@
     Les crochets [] sont obligatoires car queryParams attend un objet JavaScript 
     — sans crochets, Angular traiterait la valeur comme une simple string
   -->
-  <a routerLink="./" , [queryParams]="{ order: 'asc' }">
-    Sort Ascending / Descending
+  <a
+    routerLink="./"
+    ,
+    [queryParams]="{ order: order() === 'asc' ? 'desc' : 'asc' }"
+  >
+    Sort {{ order() === "asc" ? "Descending" : "Ascending" }}
   </a>
 </p>
 

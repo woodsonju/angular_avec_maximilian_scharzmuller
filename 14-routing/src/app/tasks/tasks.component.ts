@@ -17,7 +17,7 @@ export class TasksComponent {
   // =>  reçoit automatiquement :userId de la route PARENT
   //
   userId = input.required<string>();
-
+  order = input<'asc' | 'desc'>();
   private tasksService = inject(TasksService);
 
   //Calculé automatiquement
