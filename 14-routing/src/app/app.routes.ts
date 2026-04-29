@@ -19,7 +19,7 @@ export const routes: Routes = [
     data: {
       message: 'Hello!',
     },
-    resolve: { userName: resolveUserName },
+    resolve: { userName: resolveUserName }, // 'userName' = nom de l'input dans le composant
   },
   {
     path: '**',

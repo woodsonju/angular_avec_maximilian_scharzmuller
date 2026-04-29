@@ -1,6 +1,7 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import {
+  ActivatedRoute,
   ActivatedRouteSnapshot,
   ResolveFn,
   RouterLink,
@@ -15,7 +16,7 @@ import {
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink],
 })
-export class UserTasksComponent {
+export class UserTasksComponent implements OnInit {
   //Façon moderne : avec withComponentInputBinding() voir app.config.ts
   //withComponentInputBinding() permet de lier automatiquement les paramètres
   //de l'URL (:userId). Plus besoin d'ActivatedRoute(ancienne méthode)
@@ -36,6 +37,16 @@ export class UserTasksComponent {
   //Via withComponentInputBinding()
   // reçoit automatiquement la data de la route
   message = input.required<string>();
+
+  private activatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+    });
+  }
 
   // ngOnInit(): void {
   //   console.log('Input Data: ' + this.message());
