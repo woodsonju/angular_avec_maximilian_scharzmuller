@@ -2,7 +2,11 @@
   <header>
     <h2>{{ userName }} Tasks</h2>
     <menu>
-      <a>Add Task</a>
+      <!--  👆
+        pas de / = depuis l'URL COURANTE
+        → relatif à la route active
+      -->
+      <a routerLink="tasks/new">Add Task</a>
     </menu>
   </header>
 
