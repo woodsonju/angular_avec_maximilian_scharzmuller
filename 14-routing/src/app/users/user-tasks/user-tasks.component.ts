@@ -33,13 +33,17 @@ export class UserTasksComponent implements OnInit {
 
   userName = '';
 
+  //Via withComponentInputBinding()
+  // reçoit automatiquement la data de la route
+  message = input.required<string>();
+
   ngOnInit(): void {
+    console.log('Input Data: ' + this.message());
     //Snapshot — valeur figée au moment du chargement
     console.log(this.activatedRoute.snapshot);
     console.log(this.activatedRoute.snapshot.paramMap.get('userId'));
 
     // Observable — valeur réactive qui change
-
     const subscription = this.activatedRoute.paramMap.subscribe({
       next: (paramMap) => {
         this.userName =
