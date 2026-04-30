@@ -2,7 +2,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { TasksService } from '../tasks.service';
-import { Router, RouterLink } from '@angular/router';
+import { CanDeactivateFn, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-new-task',
@@ -35,3 +35,22 @@ export class NewTaskComponent {
     });
   }
 }
+
+export const canLeaveEditPage: CanDeactivateFn<NewTaskComponent> = (
+  component, // instance du composant NewTaskComponent
+) => {
+  // Vérifier si l'utilisateur a saisi quelque chose
+  if (
+    component.enteredTitle() ||
+    component.enteredSummary() ||
+    component.enteredDate()
+  ) {
+    return window.confirm(
+      'Do you really want to leave? You will lose the entered data!',
+    );
+    // → true  (OK)     → navigation autorisée
+    // → false (Annuler) → navigation bloquée
+  }
+  // Aucune donnée → quitter librement
+  return true;
+};
